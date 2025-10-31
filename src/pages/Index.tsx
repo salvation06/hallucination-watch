@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { EntryCard } from "@/components/EntryCard";
 import { FiltersBar } from "@/components/FiltersBar";
+import { Button } from "@/components/ui/button";
 import { AlertCircle } from "lucide-react";
 
 // Mock data for demo
@@ -102,14 +104,72 @@ export default function Index() {
       return 0;
     });
 
+  const scrollToReports = () => {
+    document.getElementById('reports-section')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="container mx-auto px-4 py-8">
+      
+      {/* Hero Section */}
+      <section className="relative overflow-hidden" style={{ background: 'var(--gradient-hero)' }}>
+        <div className="container mx-auto px-4 py-20 md:py-32">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-medium mb-6 animate-fade-in">
+              <AlertCircle className="h-4 w-4" />
+              <span>Community-Powered AI Accuracy</span>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-fade-in">
+              Track AI Hallucinations.<br />Build Better Models.
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in">
+              Crowdsource AI accuracy reports and help model providers improve their systems. 
+              Every hallucination documented brings us closer to more reliable AI.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
+              <Button 
+                size="lg" 
+                onClick={scrollToReports}
+                className="text-lg px-8 shadow-lg hover:shadow-xl transition-all"
+              >
+                Explore Reports
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
+                asChild
+                className="text-lg px-8 border-2"
+              >
+                <Link to="/report">Report Hallucination</Link>
+              </Button>
+            </div>
+            
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-8 mt-16 pt-16 border-t border-border/50">
+              <div>
+                <div className="text-3xl md:text-4xl font-bold text-primary mb-2">1,247</div>
+                <div className="text-sm text-muted-foreground">Reports Submitted</div>
+              </div>
+              <div>
+                <div className="text-3xl md:text-4xl font-bold text-primary mb-2">12</div>
+                <div className="text-sm text-muted-foreground">AI Models Tracked</div>
+              </div>
+              <div>
+                <div className="text-3xl md:text-4xl font-bold text-primary mb-2">89%</div>
+                <div className="text-sm text-muted-foreground">Vendor Response Rate</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Reports Section */}
+      <main id="reports-section" className="container mx-auto px-4 py-16">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Hallucination Reports</h1>
+          <h2 className="text-3xl font-bold mb-2">Recent Reports</h2>
           <p className="text-muted-foreground">
-            Community-driven database of AI model hallucinations and inaccuracies
+            Browse community-submitted AI hallucinations and accuracy issues
           </p>
         </div>
 

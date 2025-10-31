@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { ModelBadge } from "@/components/ModelBadge";
 import { TagList } from "@/components/TagList";
 import { RatingStars } from "@/components/RatingStars";
+import { ReportToVendorDialog } from "@/components/ReportToVendorDialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -79,6 +80,7 @@ export default function EntryDetailPage() {
                   </Badge>
                 </div>
                 <div className="flex items-center gap-2">
+                  <ReportToVendorDialog model={mockEntry.model} entryId={mockEntry.id} />
                   <Button variant="ghost" size="sm" onClick={handleFlag}>
                     <Flag className="h-4 w-4" />
                   </Button>

@@ -4,15 +4,15 @@ import { AlertCircle, BarChart3, Plus } from "lucide-react";
 
 export function Header() {
   return (
-    <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+    <header className="border-b bg-card/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-              <AlertCircle className="h-5 w-5 text-primary-foreground" />
+            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-md">
+              <AlertCircle className="h-5 w-5 text-white" />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg font-bold">Hallucination Tracker</span>
+              <span className="text-lg font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Hallucination Tracker</span>
               <span className="text-xs text-muted-foreground">Community-driven AI accuracy</span>
             </div>
           </Link>
@@ -23,7 +23,7 @@ export function Header() {
                 <span className="hidden sm:inline">Models</span>
               </Link>
             </Button>
-            <Button size="sm" asChild>
+            <Button size="sm" asChild className="shadow-md">
               <Link to="/report">
                 <Plus className="h-4 w-4 mr-2" />
                 Report
