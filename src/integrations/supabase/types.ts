@@ -14,6 +14,138 @@ export type Database = {
   }
   public: {
     Tables: {
+      bounties: {
+        Row: {
+          created_at: string
+          description: string
+          id: string
+          model: string
+          reward_amount: number
+          reward_currency: string
+          severity_required: string
+          status: string
+          title: string
+          vendor_name: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          id?: string
+          model: string
+          reward_amount: number
+          reward_currency?: string
+          severity_required?: string
+          status?: string
+          title: string
+          vendor_name: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: string
+          model?: string
+          reward_amount?: number
+          reward_currency?: string
+          severity_required?: string
+          status?: string
+          title?: string
+          vendor_name?: string
+        }
+        Relationships: []
+      }
+      bounty_claims: {
+        Row: {
+          bounty_id: string
+          created_at: string
+          id: string
+          report_id: string
+          status: string
+          user_id: string
+          wallet_address: string | null
+        }
+        Insert: {
+          bounty_id: string
+          created_at?: string
+          id?: string
+          report_id: string
+          status?: string
+          user_id: string
+          wallet_address?: string | null
+        }
+        Update: {
+          bounty_id?: string
+          created_at?: string
+          id?: string
+          report_id?: string
+          status?: string
+          user_id?: string
+          wallet_address?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bounty_claims_bounty_id_fkey"
+            columns: ["bounty_id"]
+            isOneToOne: false
+            referencedRelation: "bounties"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bounty_claims_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "hallucination_reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      hallucination_reports: {
+        Row: {
+          corrected_info: string | null
+          created_at: string
+          hallucinated_output: string
+          id: string
+          is_anonymous: boolean
+          model: string
+          prompt: string
+          severity: string
+          sources: string[] | null
+          status: string
+          updated_at: string
+          user_id: string
+          vendor: string
+        }
+        Insert: {
+          corrected_info?: string | null
+          created_at?: string
+          hallucinated_output: string
+          id?: string
+          is_anonymous?: boolean
+          model: string
+          prompt: string
+          severity?: string
+          sources?: string[] | null
+          status?: string
+          updated_at?: string
+          user_id: string
+          vendor: string
+        }
+        Update: {
+          corrected_info?: string | null
+          created_at?: string
+          hallucinated_output?: string
+          id?: string
+          is_anonymous?: boolean
+          model?: string
+          prompt?: string
+          severity?: string
+          sources?: string[] | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+          vendor?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -44,6 +176,89 @@ export type Database = {
         }
         Relationships: []
       }
+      ratings: {
+        Row: {
+          created_at: string
+          id: string
+          rating: number
+          report_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          rating: number
+          report_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          rating?: number
+          report_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ratings_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "hallucination_reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      report_tags: {
+        Row: {
+          id: string
+          report_id: string
+          tag_id: string
+        }
+        Insert: {
+          id?: string
+          report_id: string
+          tag_id: string
+        }
+        Update: {
+          id?: string
+          report_id?: string
+          tag_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_tags_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "hallucination_reports"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "report_tags_tag_id_fkey"
+            columns: ["tag_id"]
+            isOneToOne: false
+            referencedRelation: "tags"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tags: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
@@ -61,6 +276,41 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      vendor_responses: {
+        Row: {
+          created_at: string
+          id: string
+          report_id: string
+          response: string
+          status: string
+          vendor_name: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          report_id: string
+          response: string
+          status?: string
+          vendor_name: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          report_id?: string
+          response?: string
+          status?: string
+          vendor_name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "vendor_responses_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "hallucination_reports"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {

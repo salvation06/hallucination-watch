@@ -10,6 +10,8 @@ import EntryDetailPage from "./pages/EntryDetailPage";
 import ModelsPage from "./pages/ModelsPage";
 import AuthPage from "./pages/AuthPage";
 import UserProfilePage from "./pages/UserProfilePage";
+import VendorProfilePage from "./pages/VendorProfilePage";
+import BountiesPage from "./pages/BountiesPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +30,8 @@ const App = () => (
             <Route path="/entry/:id" element={<EntryDetailPage />} />
             <Route path="/models" element={<ModelsPage />} />
             <Route path="/user/:username" element={<UserProfilePage />} />
+            <Route path="/vendor/:vendor" element={<VendorProfilePage />} />
+            <Route path="/bounties" element={<BountiesPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

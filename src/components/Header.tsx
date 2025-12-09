@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { AlertCircle, BarChart3, Plus, LogIn, LogOut, User } from "lucide-react";
+import { AlertCircle, BarChart3, Plus, LogIn, LogOut, User, Coins } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 
 export function Header() {
@@ -36,6 +36,12 @@ export function Header() {
               <Link to="/models">
                 <BarChart3 className="h-4 w-4 mr-2" />
                 <span className="hidden sm:inline">Models</span>
+              </Link>
+            </Button>
+            <Button variant="ghost" size="sm" asChild>
+              <Link to="/bounties">
+                <Coins className="h-4 w-4 mr-2" />
+                <span className="hidden sm:inline">Bounties</span>
               </Link>
             </Button>
             <Button size="sm" asChild className="shadow-md">
