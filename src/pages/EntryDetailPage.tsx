@@ -75,9 +75,15 @@ export default function EntryDetailPage() {
               <div className="flex items-start justify-between gap-4 mb-4">
                 <div className="flex items-center gap-2 flex-wrap">
                   <ModelBadge model={mockEntry.model} />
-                  <Badge variant="outline" className="gap-1">
-                    {mockEntry.isAnonymous ? "Anonymous" : `@${mockEntry.reporterHandle}`}
-                  </Badge>
+                  {mockEntry.isAnonymous ? (
+                    <Badge variant="outline">Anonymous</Badge>
+                  ) : (
+                    <Link to={`/user/${mockEntry.reporterHandle}`}>
+                      <Badge variant="outline" className="gap-1 hover:bg-primary/10 cursor-pointer">
+                        @{mockEntry.reporterHandle}
+                      </Badge>
+                    </Link>
+                  )}
                 </div>
                 <div className="flex items-center gap-2">
                   <ReportToVendorDialog model={mockEntry.model} entryId={mockEntry.id} />

@@ -51,9 +51,20 @@ export function EntryCard({
           </CardDescription>
           <TagList tags={tags} />
           <div className="flex items-center justify-between text-xs text-muted-foreground pt-2 border-t">
-            <span>
-              {isAnonymous ? "Anonymous" : `@${reporterHandle}`}
-            </span>
+            {isAnonymous ? (
+              <span>Anonymous</span>
+            ) : (
+              <span
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  window.location.href = `/user/${reporterHandle}`;
+                }}
+                className="text-primary hover:underline cursor-pointer font-medium"
+              >
+                @{reporterHandle}
+              </span>
+            )}
             <span>{formatDistanceToNow(createdAt, { addSuffix: true })}</span>
           </div>
         </CardContent>
